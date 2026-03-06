@@ -1,0 +1,12 @@
+{{#if this.structuredTags}}
+  <div class="structured-tag-list">
+    {{#each this.structuredTags as |tag|}}
+      <a href={{tag.url}} class="discourse-tag structured-tag" data-tag-name={{tag.original}}>
+        {{#if tag.category}}
+          <span class="structured-tag-category {{tag.category}}">{{tag.category}}:</span>
+        {{/if}}
+        <span class="structured-tag-value">{{tag.value}}</span>
+      </a>
+    {{/each}}
+  </div>
+{{/if}}

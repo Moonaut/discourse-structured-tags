@@ -1,0 +1,38 @@
+// Hide the default Discourse tags in the topic list
+.topic-list-item .discourse-tags {
+  display: none;
+}
+
+// Style the new structured tag list
+.structured-tag-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  
+  .structured-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85em; // Adjust as needed
+    color: var(--primary-medium);
+    
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  // Optional: Style the category prefix (e.g. "milestone:")
+  .structured-tag-category {
+    font-weight: bold;
+    margin-right: 2px;
+    opacity: 0.8;
+    
+    // Example: Specific color for milestone tags
+    &.milestone {
+      color: var(--tertiary);
+    }
+  }
+
+  .structured-tag-value {
+    // Styling for the value part
+  }
+}
