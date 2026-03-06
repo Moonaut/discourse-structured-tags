@@ -1,0 +1,10 @@
+{
+  "name": "Structured Tag List",
+  "component": true,
+  "license_url": null,
+  "about_url": null,
+  "authors": "inknight",
+  "theme_version": "1.0",
+  "minimum_discourse_version": "3.1.0",
+  "assets": {}
+}
