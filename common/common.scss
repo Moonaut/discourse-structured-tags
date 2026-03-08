@@ -5,6 +5,10 @@
     --tag-color-milestone: #ff5dcc;
 }
 
+.discourse-tag.box {
+    border-radius: 999rem;
+}
+
 @media (prefers-color-scheme: dark) {
     .discourse-tag[data-tag-name="status:confirmed"] {
         background: color-mix(in srgb, var(--tag-color-danger) 20%, transparent);
