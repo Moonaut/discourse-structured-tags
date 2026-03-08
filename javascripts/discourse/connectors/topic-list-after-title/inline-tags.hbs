@@ -1,5 +1,7 @@
 {{#if topic.tags}}
   <span class="inline-topic-tags">
-    {{discourse-tags tags=topic.tags}}
+    {{#each topic.tags as |tag|}}
+      <a href="/tag/{{tag}}" class="discourse-tag simple">{{tag}}</a>
+    {{/each}}
   </span>
 {{/if}}
