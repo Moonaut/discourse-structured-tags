@@ -13,6 +13,17 @@
     display: none;
 }
 
+.inline-topic-tags {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.inline-topic-tags .discourse-tag {
+  font-size: 0.85em;
+  padding: 2px 6px;
+}
+
 @media (prefers-color-scheme: dark) {
     .discourse-tag[data-tag-name="status:confirmed"] {
         background: color-mix(in srgb, var(--tag-color-danger) 20%, transparent);
