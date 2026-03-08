@@ -9,6 +9,10 @@
     border-radius: 999rem;
 }
 
+.topic-list .discourse-tags {
+    display: none;
+}
+
 @media (prefers-color-scheme: dark) {
     .discourse-tag[data-tag-name="status:confirmed"] {
         background: color-mix(in srgb, var(--tag-color-danger) 20%, transparent);
