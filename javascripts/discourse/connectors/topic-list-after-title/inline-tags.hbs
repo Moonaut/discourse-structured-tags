@@ -1,7 +1,34 @@
 {{#if topic.tags}}
-  <span class="inline-topic-tags">
-    {{#each topic.tags as |tag|}}
-      <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">{{tag.name}}</a>
-    {{/each}}
+  <span class="inline-topic-tags" data-expanded="false">
+    {{#let
+      (array "status:fixed" "status:needs-testing" "status:confirmed")
+      as |priorityTags|
+    }}
+      {{#let
+        (concat
+          (filter topic.tags (fn (tag) (includes priorityTags tag.name)))
+          (uniq-by
+            (filter topic.tags (fn (tag) (not (includes priorityTags tag.name))))
+            (fn (tag) (get (split tag.name ":") "0"))
+          )
+        )
+        as |dedupedTags|
+      }}
+        {{#each (slice dedupedTags 0 3) as |tag|}}
+          <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">{{tag.name}}</a>
+        {{/each}}
+
+        {{#if (gt dedupedTags.length 3)}}
+          <span class="discourse-tags-overflow">
+            <span class="discourse-tags-overflow-toggle">+{{subtract dedupedTags.length 3}}</span>
+            <span class="discourse-tags-overflow-hidden">
+              {{#each (slice dedupedTags 3) as |tag|}}
+                <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">{{tag.name}}</a>
+              {{/each}}
+            </span>
+          </span>
+        {{/if}}
+      {{/let}}
+    {{/let}}
   </span>
 {{/if}}

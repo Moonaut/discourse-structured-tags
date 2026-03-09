@@ -44,13 +44,13 @@
 .discourse-tag[data-tag-name="status:needs_testing"],
 .discourse-tag[data-tag-name*="milestone:"] {
     background: oklch(from var(--tag-color) l c h / var(--tag-bg-alpha));
-    border: 1px solid
-        oklch(from var(--tag-color) l c h / var(--tag-border-alpha));
     color: var(--tag-color);
+    font-weight: bold;
+    letter-spacing: -0.025em;
 }
 
 .discourse-tag.box {
-    border-radius: 999rem;
+    border-radius: var(--d-border-radius);
 }
 
 .topic-list .discourse-tags {
