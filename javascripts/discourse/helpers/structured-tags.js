@@ -1,20 +1,26 @@
 import { helper } from "@ember/component/helper";
 
-const PRIORITY = ["status:confirmed", "status:needs-testing", "status:fixed"];
+const PRIORITY_TAGS = ["status:confirmed", "status:needs-testing", "status:fixed"];
+const PRIORITY_PREFIXES = ["status", "milestone", "in", "about"];
 const MAX_VISIBLE = 3;
+
+function tagSortKey(name) {
+  // Exact priority tags get top spots (0, 1, 2)
+  const exactIndex = PRIORITY_TAGS.indexOf(name);
+  if (exactIndex !== -1) return exactIndex;
+
+  // Then sort by prefix order, offset past the exact-match slots
+  const prefix = name.includes(":") ? name.split(":")[0] : name;
+  const prefixIndex = PRIORITY_PREFIXES.indexOf(prefix);
+  return prefixIndex !== -1
+    ? PRIORITY_TAGS.length + prefixIndex
+    : PRIORITY_TAGS.length + PRIORITY_PREFIXES.length;
+}
 
 export default helper(function structuredTags([tags]) {
   if (!tags?.length) return { visible: [], hidden: [] };
 
-  // Sort: priority tags first, then others
-  const sorted = [...tags].sort((a, b) => {
-    const ai = PRIORITY.indexOf(a.name);
-    const bi = PRIORITY.indexOf(b.name);
-    if (ai !== -1 && bi !== -1) return ai - bi;
-    if (ai !== -1) return -1;
-    if (bi !== -1) return 1;
-    return 0;
-  });
+  const sorted = [...tags].sort((a, b) => tagSortKey(a.name) - tagSortKey(b.name));
 
   // Deduplicate by prefix (keep first encountered per prefix)
   const seen = new Set();
