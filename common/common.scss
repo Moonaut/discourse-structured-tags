@@ -29,7 +29,7 @@
     --tag-color: var(--tag-color-success);
     order: -1;
 }
-.discourse-tag[data-tag-name="status:needs_testing"] {
+.discourse-tag[data-tag-name="status:needs-testing"] {
     --tag-color: var(--tag-color-warning);
     order: -1;
 }
@@ -41,7 +41,7 @@
 .discourse-tag[data-tag-name="status:confirmed"],
 .discourse-tag[data-tag-name="status:fixed"],
 .discourse-tag[data-tag-name="status:implemented"],
-.discourse-tag[data-tag-name="status:needs_testing"],
+.discourse-tag[data-tag-name="status:needs-testing"],
 .discourse-tag[data-tag-name*="milestone:"] {
     background: oklch(from var(--tag-color) l c h / var(--tag-bg-alpha));
     color: var(--tag-color);

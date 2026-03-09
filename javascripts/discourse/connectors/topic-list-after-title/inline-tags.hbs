@@ -4,7 +4,7 @@
 
       {{#each s.visible as |tag|}}
         <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">
-          {{tag.name}}
+          {{tag-display-name tag.name}}
         </a>
       {{/each}}
 
@@ -19,7 +19,7 @@
         <span class="extra-tags" hidden>
           {{#each s.hidden as |tag|}}
             <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">
-              {{tag.name}}
+              {{tag-display-name tag.name}}
             </a>
           {{/each}}
         </span>
