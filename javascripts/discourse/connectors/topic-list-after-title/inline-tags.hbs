@@ -1,13 +1,18 @@
 {{#if topic.tags}}
   {{#let (structured-tags topic.tags) as |s|}}
     <span class="inline-topic-tags">
-
+      
+        href="/t/{{topic.slug}}/{{topic.id}}/1"
+        data-topic-id="{{topic.id}}"
+        class="discourse-tag box inline-topic-title-link"
+      >
+        {{topic.title}}
+      </a>
       {{#each s.visible as |tag|}}
         <a href="/tag/{{tag.name}}" class="discourse-tag box" data-tag-name="{{tag.name}}">
           {{tag-display-name tag.name}}
         </a>
       {{/each}}
-
       {{#if s.hidden.length}}
         <span
           class="discourse-tag box extra-tags-toggle"
@@ -24,7 +29,6 @@
           {{/each}}
         </span>
       {{/if}}
-
     </span>
   {{/let}}
 {{/if}}
