@@ -86,6 +86,6 @@
   order: -999;
 }
 
-a.title.raw-link.raw-topic-link {
-  display: none;
+a.title.raw-link.raw-topic-link:not(.inline-title) {
+  display: none !important;
 }
