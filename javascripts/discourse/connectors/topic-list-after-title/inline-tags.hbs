@@ -1,7 +1,7 @@
 {{#if topic.tags}}
   {{#let (structured-tags topic.tags) as |s|}}
     <span class="inline-topic-tags">
-      
+      <a
         href="/t/{{topic.slug}}/{{topic.id}}/1"
         data-topic-id="{{topic.id}}"
         class="discourse-tag box inline-topic-title-link"
