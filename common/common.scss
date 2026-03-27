@@ -1,41 +1,45 @@
 :root {
-    --tag-color-warning: oklch(78% 0.14 84);
-    --tag-color-danger: oklch(62% 0.16 27);
-    --tag-color-success: oklch(66% 0.16 150);
-    --tag-color-milestone: oklch(62% 0.18 302);
+	--tag-color-warning: oklch(78% 0.14 84);
+	--tag-color-danger: oklch(62% 0.16 27);
+	--tag-color-success: oklch(66% 0.16 150);
+	--tag-color-milestone: oklch(62% 0.18 302);
 
-    --tag-bg-alpha: 18%;
-    --tag-border-alpha: 28%;
+	--tag-bg-alpha: 18%;
+	--tag-border-alpha: 28%;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --tag-color-warning: oklch(78% 0.13 84);
-        --tag-color-danger: oklch(68% 0.14 27);
-        --tag-color-success: oklch(72% 0.15 150);
-        --tag-color-milestone: oklch(70% 0.17 302);
+	:root {
+		--tag-color-warning: oklch(78% 0.13 84);
+		--tag-color-danger: oklch(68% 0.14 27);
+		--tag-color-success: oklch(72% 0.15 150);
+		--tag-color-milestone: oklch(70% 0.17 302);
 
-        --tag-bg-alpha: 14%;
-        --tag-border-alpha: 30%;
-    }
+		--tag-bg-alpha: 14%;
+		--tag-border-alpha: 30%;
+	}
 }
 
 .discourse-tag[data-tag-name="status:confirmed"] {
-    --tag-color: var(--tag-color-danger);
-    order: -1;
+	--tag-color: var(--tag-color-danger);
+	order: -1;
 }
+
 .discourse-tag[data-tag-name="status:fixed"],
 .discourse-tag[data-tag-name="status:implemented"] {
-    --tag-color: var(--tag-color-success);
-    order: -1;
+	--tag-color: var(--tag-color-success);
+	order: -1;
 }
+
+.discourse-tag[data-tag-name="status:wip"],
 .discourse-tag[data-tag-name="status:needs-testing"] {
-    --tag-color: var(--tag-color-warning);
-    order: -1;
+	--tag-color: var(--tag-color-warning);
+	order: -1;
 }
+
 .discourse-tag[data-tag-name*="milestone:"] {
-    --tag-color: var(--tag-color-milestone);
-    order: -1;
+	--tag-color: var(--tag-color-milestone);
+	order: -2;
 }
 
 .discourse-tag[data-tag-name="status:confirmed"],
@@ -43,49 +47,49 @@
 .discourse-tag[data-tag-name="status:implemented"],
 .discourse-tag[data-tag-name="status:needs-testing"],
 .discourse-tag[data-tag-name*="milestone:"] {
-    background: oklch(from var(--tag-color) l c h / var(--tag-bg-alpha));
-    color: var(--tag-color);
-    font-weight: bold;
-    letter-spacing: -0.025em;
+	background: oklch(from var(--tag-color) l c h / var(--tag-bg-alpha));
+	color: var(--tag-color);
+	font-weight: bold;
+	letter-spacing: -0.025em;
 }
 
 .discourse-tag.box {
-    border-radius: var(--d-border-radius);
+	border-radius: var(--d-border-radius);
 }
 
 .topic-list .discourse-tags {
-    display: none;
+	display: none;
 }
 
 .inline-topic-tags {
-    display: inline-flex;
-    gap: 4px;
-    margin-left: 0px;
-    font-size: var(--font-down-1);
+	display: inline-flex;
+	gap: 4px;
+	margin-left: 0px;
+	font-size: var(--font-down-1);
 }
 
 .inline-topic-tags .discourse-tag {
-    font-size: 0.85em;
-    padding: 2px 6px;
+	font-size: 0.85em;
+	padding: 2px 6px;
 }
 
 @media (max-width: 39.999rem) {
-    .topic-list .discourse-tags {
-        display: none !important;
-    }
+	.topic-list .discourse-tags {
+		display: none !important;
+	}
 }
 
 .inline-topic-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	align-items: center;
 }
 
 .inline-topic-title-link {
-  order: -999;
+	order: -999;
 }
 
 a.title.raw-link.raw-topic-link:not(.inline-topic-title-link) {
-  display: none !important;
+	display: none !important;
 }
