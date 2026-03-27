@@ -1,38 +1,50 @@
 import { helper } from "@ember/component/helper";
 
-const PRIORITY_TAGS = ["status:confirmed", "status:needs-testing", "status:fixed"];
+const PRIORITY_TAGS = [
+	"status:confirmed",
+	"status:needs-testing",
+	"status:fixed",
+];
 const PRIORITY_PREFIXES = ["status", "milestone", "in", "about"];
 const MAX_VISIBLE = 3;
 
 function tagSortKey(name) {
-  // Exact priority tags get top spots (0, 1, 2)
-  const exactIndex = PRIORITY_TAGS.indexOf(name);
-  if (exactIndex !== -1) return exactIndex;
+	if (!name) return PRIORITY_TAGS.length + PRIORITY_PREFIXES.length;
 
-  // Then sort by prefix order, offset past the exact-match slots
-  const prefix = name.includes(":") ? name.split(":")[0] : name;
-  const prefixIndex = PRIORITY_PREFIXES.indexOf(prefix);
-  return prefixIndex !== -1
-    ? PRIORITY_TAGS.length + prefixIndex
-    : PRIORITY_TAGS.length + PRIORITY_PREFIXES.length;
+	const exactIndex = PRIORITY_TAGS.indexOf(name);
+	if (exactIndex !== -1) return exactIndex;
+
+	const prefix = name.includes(":") ? name.split(":")[0] : name;
+	const prefixIndex = PRIORITY_PREFIXES.indexOf(prefix);
+
+	return prefixIndex !== -1
+		? PRIORITY_TAGS.length + prefixIndex
+		: PRIORITY_TAGS.length + PRIORITY_PREFIXES.length;
 }
 
 export default helper(function structuredTags([tags]) {
-  if (!tags?.length) return { visible: [], hidden: [] };
+	if (!tags?.length) return null;
 
-  const sorted = [...tags].sort((a, b) => tagSortKey(a.name) - tagSortKey(b.name));
+	const sorted = [...tags].sort((a, b) => {
+		const nameA = typeof a === "string" ? a : a.name;
+		const nameB = typeof b === "string" ? b : b.name;
+		return tagSortKey(nameA) - tagSortKey(nameB);
+	});
 
-  // Deduplicate by prefix (keep first encountered per prefix)
-  const seen = new Set();
-  const deduped = sorted.filter((tag) => {
-    const prefix = tag.name.includes(":") ? tag.name.split(":")[0] : tag.name;
-    if (seen.has(prefix)) return false;
-    seen.add(prefix);
-    return true;
-  });
+	const seen = new Set();
+	const deduped = sorted.filter((tag) => {
+		const name = typeof tag === "string" ? tag : tag.name;
+		if (!name) return false;
 
-  return {
-    visible: deduped.slice(0, MAX_VISIBLE),
-    hidden: deduped.slice(MAX_VISIBLE),
-  };
+		const prefix = name.includes(":") ? name.split(":")[0] : name;
+		if (seen.has(prefix)) return false;
+
+		seen.add(prefix);
+		return true;
+	});
+
+	return {
+		visible: deduped.slice(0, MAX_VISIBLE),
+		hidden: deduped.slice(MAX_VISIBLE),
+	};
 });
