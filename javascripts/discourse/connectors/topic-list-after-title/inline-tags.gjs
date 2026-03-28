@@ -13,11 +13,7 @@ export default class InlineTopicTags extends Component {
 
   shouldShowTag(tag) {
     const name = this.tagName(tag);
-
-    if (!name) {
-      return false;
-    }
-
+    if (!name) return false;
     return !this.hiddenPrefixes.some((prefix) =>
       name.toLowerCase().startsWith(prefix)
     );
@@ -30,7 +26,6 @@ export default class InlineTopicTags extends Component {
   toggleHidden(event) {
     const toggle = event.target;
     const extraTags = toggle?.nextElementSibling;
-
     if (extraTags) {
       extraTags.hidden = !extraTags.hidden;
     }
@@ -42,9 +37,7 @@ export default class InlineTopicTags extends Component {
         href={{concat "/t/" @topic.slug "/" @topic.id "/1"}}
         data-topic-id={{@topic.id}}
         class="title raw-link raw-topic-link inline-topic-title-link"
-      >
-        {{@topic.title}}
-      </a>
+      >{{@topic.title}}</a>
 
       {{#if this.visibleTags.length}}
         {{#let (structured-tags this.visibleTags) as |s|}}
@@ -53,19 +46,15 @@ export default class InlineTopicTags extends Component {
               href={{concat "/tag/" (this.tagName tag)}}
               class="discourse-tag box"
               data-tag-name={{this.tagName tag}}
-            >
-              {{tag-display-name (this.tagName tag)}}
-            </a>
+            >{{tag-display-name (this.tagName tag)}}</a>
           {{/each}}
 
           {{#if s.hidden.length}}
             <span
               class="discourse-tag box extra-tags-toggle"
               role="button"
-              {{on "click" this.toggleHidden}}
-            >
-              +{{s.hidden.length}}
-            </span>
+              onclick={{this.toggleHidden}}
+            >+{{s.hidden.length}}</span>
 
             <span class="extra-tags" hidden>
               {{#each s.hidden as |tag|}}
@@ -73,9 +62,7 @@ export default class InlineTopicTags extends Component {
                   href={{concat "/tag/" (this.tagName tag)}}
                   class="discourse-tag box"
                   data-tag-name={{this.tagName tag}}
-                >
-                  {{tag-display-name (this.tagName tag)}}
-                </a>
+                >{{tag-display-name (this.tagName tag)}}</a>
               {{/each}}
             </span>
           {{/if}}
