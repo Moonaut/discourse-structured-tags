@@ -4,16 +4,28 @@ import { action } from "@ember/object";
 export default class InlineTopicTags extends Component {
   get hiddenPrefixes() {
     return (settings.hide_from_topics_list_prefixes || [])
-      .map((prefix) => prefix?.trim())
+      .map((prefix) => prefix?.trim().toLowerCase())
       .filter(Boolean);
   }
 
+  tagName(tag) {
+    return typeof tag === "string" ? tag : tag?.name;
+  }
+
   shouldShowTag(tag) {
-    return !this.hiddenPrefixes.some((prefix) => tag.name.startsWith(prefix));
+    const name = this.tagName(tag);
+
+    if (!name) {
+      return false;
+    }
+
+    return !this.hiddenPrefixes.some((prefix) =>
+      name.toLowerCase().startsWith(prefix)
+    );
   }
 
   get visibleTags() {
-    return (this.args.outletArgs.topic.tags || []).filter((tag) => this.shouldShowTag(tag));
+    return (this.args.topic?.tags || []).filter((tag) => this.shouldShowTag(tag));
   }
 
   @action
@@ -29,22 +41,22 @@ export default class InlineTopicTags extends Component {
   <template>
     <span class="inline-topic-tags">
       <a
-        href={{`/t/${this.topic.slug}/${this.topic.id}/1`}}
-        data-topic-id={{this.topic.id}}
+        href={{concat "/t/" @topic.slug "/" @topic.id "/1"}}
+        data-topic-id={{@topic.id}}
         class="title raw-link raw-topic-link inline-topic-title-link"
       >
-        {{this.topic.title}}
+        {{@topic.title}}
       </a>
 
       {{#if this.visibleTags.length}}
         {{#let (structured-tags this.visibleTags) as |s|}}
           {{#each s.visible as |tag|}}
             <a
-              href={{`/tag/${tag.name}`}}
+              href={{concat "/tag/" (this.tagName tag)}}
               class="discourse-tag box"
-              data-tag-name={{tag.name}}
+              data-tag-name={{this.tagName tag}}
             >
-              {{tag-display-name tag.name}}
+              {{tag-display-name (this.tagName tag)}}
             </a>
           {{/each}}
 
@@ -60,11 +72,11 @@ export default class InlineTopicTags extends Component {
             <span class="extra-tags" hidden>
               {{#each s.hidden as |tag|}}
                 <a
-                  href={{`/tag/${tag.name}`}}
+                  href={{concat "/tag/" (this.tagName tag)}}
                   class="discourse-tag box"
-                  data-tag-name={{tag.name}}
+                  data-tag-name={{this.tagName tag}}
                 >
-                  {{tag-display-name tag.name}}
+                  {{tag-display-name (this.tagName tag)}}
                 </a>
               {{/each}}
             </span>
