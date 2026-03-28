@@ -1,5 +1,4 @@
 import Component from "@glimmer/component";
-import { action } from "@ember/object";
 
 export default class InlineTopicTags extends Component {
   get hiddenPrefixes() {
@@ -28,7 +27,6 @@ export default class InlineTopicTags extends Component {
     return (this.args.topic?.tags || []).filter((tag) => this.shouldShowTag(tag));
   }
 
-  @action
   toggleHidden(event) {
     const toggle = event.target;
     const extraTags = toggle?.nextElementSibling;
@@ -40,7 +38,7 @@ export default class InlineTopicTags extends Component {
 
   <template>
     <span class="inline-topic-tags">
-      <a
+      
         href={{concat "/t/" @topic.slug "/" @topic.id "/1"}}
         data-topic-id={{@topic.id}}
         class="title raw-link raw-topic-link inline-topic-title-link"
@@ -51,7 +49,7 @@ export default class InlineTopicTags extends Component {
       {{#if this.visibleTags.length}}
         {{#let (structured-tags this.visibleTags) as |s|}}
           {{#each s.visible as |tag|}}
-            <a
+            
               href={{concat "/tag/" (this.tagName tag)}}
               class="discourse-tag box"
               data-tag-name={{this.tagName tag}}
@@ -71,7 +69,7 @@ export default class InlineTopicTags extends Component {
 
             <span class="extra-tags" hidden>
               {{#each s.hidden as |tag|}}
-                <a
+                
                   href={{concat "/tag/" (this.tagName tag)}}
                   class="discourse-tag box"
                   data-tag-name={{this.tagName tag}}
