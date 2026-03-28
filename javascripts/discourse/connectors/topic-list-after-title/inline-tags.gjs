@@ -13,7 +13,7 @@ export default class InlineTopicTags extends Component {
   }
 
   get visibleTags() {
-    return (this.args.topic.tags || []).filter((tag) => this.shouldShowTag(tag));
+    return (this.args.outletArgs.topic.tags || []).filter((tag) => this.shouldShowTag(tag));
   }
 
   @action
@@ -29,11 +29,11 @@ export default class InlineTopicTags extends Component {
   <template>
     <span class="inline-topic-tags">
       <a
-        href={{`/t/${@topic.slug}/${@topic.id}/1`}}
-        data-topic-id={{@topic.id}}
+        href={{`/t/${this.topic.slug}/${this.topic.id}/1`}}
+        data-topic-id={{this.topic.id}}
         class="title raw-link raw-topic-link inline-topic-title-link"
       >
-        {{@topic.title}}
+        {{this.topic.title}}
       </a>
 
       {{#if this.visibleTags.length}}
