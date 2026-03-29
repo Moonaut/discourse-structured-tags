@@ -20,34 +20,34 @@
 	}
 }
 
-.discourse-tag[data-tag-name="status:confirmed"] {
+.discourse-tag[data-tag-name="confirmed"] {
 	--tag-color: var(--tag-color-danger);
 	order: -1;
 }
 
-.discourse-tag[data-tag-name="status:fixed"],
-.discourse-tag[data-tag-name="status:implemented"] {
+.discourse-tag[data-tag-name="fixed"],
+.discourse-tag[data-tag-name="implemented"] {
 	--tag-color: var(--tag-color-success);
 	order: -1;
 }
 
-.discourse-tag[data-tag-name="status:wip"],
-.discourse-tag[data-tag-name="status:needs-testing"] {
+.discourse-tag[data-tag-name="wip"],
+.discourse-tag[data-tag-name="needs-testing"] {
 	--tag-color: var(--tag-color-warning);
 	order: -1;
 }
 
-.discourse-tag[data-tag-name*="milestone:"] {
+.discourse-tag.milestone {
 	--tag-color: var(--tag-color-milestone);
 	order: -2;
 }
 
-.discourse-tag[data-tag-name="status:wip"],
-.discourse-tag[data-tag-name="status:confirmed"],
-.discourse-tag[data-tag-name="status:fixed"],
-.discourse-tag[data-tag-name="status:implemented"],
-.discourse-tag[data-tag-name="status:needs-testing"],
-.discourse-tag[data-tag-name*="milestone:"] {
+.discourse-tag[data-tag-name="wip"],
+.discourse-tag[data-tag-name="confirmed"],
+.discourse-tag[data-tag-name="fixed"],
+.discourse-tag[data-tag-name="implemented"],
+.discourse-tag[data-tag-name="needs-testing"],
+.discourse-tag.milestone {
 	background: oklch(from var(--tag-color) l c h / var(--tag-bg-alpha));
 	color: var(--tag-color);
 	font-weight: bold;
