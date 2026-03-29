@@ -22,24 +22,24 @@
 
 .discourse-tag[data-tag-name="confirmed"] {
 	--tag-color: var(--tag-color-danger);
-	order: -1;
+	order: -2;
 }
 
 .discourse-tag[data-tag-name="fixed"],
 .discourse-tag[data-tag-name="implemented"] {
 	--tag-color: var(--tag-color-success);
-	order: -1;
+	order: -2;
 }
 
 .discourse-tag[data-tag-name="wip"],
 .discourse-tag[data-tag-name="needs-testing"] {
 	--tag-color: var(--tag-color-warning);
-	order: -1;
+	order: -2;
 }
 
 .discourse-tag.milestone {
 	--tag-color: var(--tag-color-milestone);
-	order: -2;
+	order: -1;
 }
 
 .discourse-tag[data-tag-name="wip"],
